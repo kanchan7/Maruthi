@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="show_sql">false</property>
+        <property name="current_session_context_class">thread</property>
+        <property name="hbm2ddl.auto">update</property>
+        <property name="dialect">org.hibernate.dialect.MySQLDialect</property>
+        <property name="connection.url">jdbc:mysql://127.0.0.1:3306/marrygold?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=UTF-8</property>
+        <!--<property name="connection.url">jdbc:mysql://localhost:5543/tms?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=UTF-8</property>-->
+        <property name="connection.username">root</property>
+        <property name="connection.password">system@25255</property>
+        <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="c3p0.acquire_increment">1</property>
+        <property name="c3p0.idle_test_period">3000</property>
+        <property name="c3p0.max_size">5</property>
+        <property name="c3p0.min_size">2</property>
+        <property name="c3p0.max_statements">5</property>
+        <property name="c3p0.timeout">180</property>
+        <!--    User Management     -->
+        <mapping class="com.koderunner.vo.SDUserVO"/>
+        <mapping class="com.koderunner.vo.Product"/>
+        
+    </session-factory>
+</hibernate-configuration>
