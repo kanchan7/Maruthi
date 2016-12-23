@@ -6,31 +6,30 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.koderunner.dao.ProductDao;
 import com.koderunner.dao.SDUserDAO;
 import com.koderunner.vo.SDUserVO;
-@Service("")
+@Service("userService")
 @Transactional
 public class SDUserServiceImpl implements SDUserService{
+	@Autowired
+    private  SDUserDAO userDAO;
 	
-
-    private static List<SDUserVO> populateAllUsers(SDUserDAO pSDUserDaO){
-        List<SDUserVO> users = (List<SDUserVO>)(pSDUserDaO.getAllUsers());
-        return users;
+	
+    private  List<SDUserVO> populateAllUsers(){
+        return (List<SDUserVO>)(userDAO.getAllUsers());
     }
 
 
-	public SDUserVO findUserById(SDUserDAO pSDUserDaO, String pLoginId) {
+	public SDUserVO findUserById(String pLoginId) {
 		List<SDUserVO> allUsers = null;
-		allUsers = populateAllUsers(pSDUserDaO);
+		allUsers = populateAllUsers();
 		if(allUsers != null){
-			for(Object user : allUsers){
-				SDUserVO vUser = (SDUserVO)user;
-				System.out.println("123");
-				//String vlogid = ((SDUserVO)user).getLoginId();
-				/*if((((SDUserVO)user).getLoginId()).equalsIgnoreCase(pLoginId)){
-					return (SDUserVO) user;
-				}*/
-			}
+			for(SDUserVO vUser:allUsers){
+	    		if(vUser.getLoginId().equalsIgnoreCase(pLoginId)){
+	    			return vUser;
+	    		}
+	    	}
 		}
 		return null;
 	}

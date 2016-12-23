@@ -6,6 +6,6 @@ import com.koderunner.vo.SDUserVO;
 public interface  SDUserService{
 	
 
-	SDUserVO findUserById(SDUserDAO pSDUserDaO, String loginId);
+	SDUserVO findUserById(String loginId);
 
 }

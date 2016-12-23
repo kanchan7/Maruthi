@@ -72,15 +72,10 @@ public class SDUserDAO extends HibernateDaoSupport {
 	 @SuppressWarnings("unchecked")
 		public List<SDUserVO> getAllUsers() {
 		        List<SDUserVO> allUsers = null;
-		        Transaction tx = null;
-		        // Configure the session factory
-		      //  configureSessionFactory();
 		        Session session = getSessionFactory().openSession();
 		        try {
-		            tx = session.beginTransaction();
-		            allUsers = ( List<SDUserVO>)(session.createSQLQuery("SELECT * FROM SDUSER_DETAILS").list());
-		            tx.commit();
-		            tx = null;
+		            Query query = session.createQuery("from SDUserVO");
+		            allUsers = query.list();
 		        } catch (HibernateException e) {
 		            e.printStackTrace();
 		        } finally {

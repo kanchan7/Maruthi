@@ -11,48 +11,45 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.koderunner.dao.SDUserDAO;
 import com.koderunner.vo.SDUserVO;
+
 
 @RestController
 public class SDRestController {
 	@Autowired
-    SDUserService userService;
-	@Autowired
-    SDUserDAO userDAO;
-    
-    
-    /*@RequestMapping(value = "/addUser",method=RequestMethod.GET)
-	@ResponseBody
-	public ResponseEntity addUserDetails() {
-		
-		return new ResponseEntity("Shailendra added", HttpStatus.OK);
-	}
-    
-	@RequestMapping(value = "/customer/{id}",method=RequestMethod.GET)
-	@ResponseBody
-	public ResponseEntity getUserDetails(@PathVariable("id")String id) {
-		
-		return new ResponseEntity("Shailendra", HttpStatus.OK);
-	}*/
-	
-	 //-------------------Retrieve Single User--------------------------------------------------------
+    private SDUserService userService;
+
     
 	
-    @RequestMapping(value = "/user/{loginId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<SDUserVO> getUser(@PathVariable("loginId") String loginId) {
+    @RequestMapping(value = "/abc/user/{loginId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<SDUserVO> getUserDetail(@PathVariable("loginId") String loginId) {
+    	 SDUserVO user = null;
         System.out.println("Fetching User with loginId " + loginId);
        // SDUserVO user = userService.findUserById(userDAO,loginId);
-        SDUserVO user = (SDUserVO) userDAO.findUserByLoginId(loginId);
+        //SDUserVO user = (SDUserVO) userDAO.findUserByLoginId(loginId);
         
         if (user == null) {
             System.out.println("User with id " + loginId + " not found");
             return new ResponseEntity<SDUserVO>(HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<SDUserVO>(user, HttpStatus.OK);
+        	return new ResponseEntity<SDUserVO>(user, HttpStatus.OK);
     }	
 	
-
+    @RequestMapping(value = "/user/{loginId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<SDUserVO> getUser(@PathVariable("loginId") String pLoginId) {
+        System.out.println("Fetching User with loginId " + pLoginId);
+        SDUserVO vUser = userService.findUserById(pLoginId);
+       // SDUserVO user = (SDUserVO) userDAO.findUserByLoginId(loginId);
+        
+        if (vUser == null) {
+            System.out.println("User with id " + pLoginId + " not found");
+            return new ResponseEntity<SDUserVO>(HttpStatus.NOT_FOUND);
+        }else{
+        	
+        	return new ResponseEntity<SDUserVO>(vUser, HttpStatus.OK);
+        }
+        
+    }	
 
 
 }

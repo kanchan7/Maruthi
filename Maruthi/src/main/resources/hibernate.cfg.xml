@@ -20,6 +20,12 @@
         <!--    User Management     -->
         <mapping class="com.koderunner.vo.SDUserVO"/>
         <mapping class="com.koderunner.vo.Product"/>
+        <!--    Rest Webservice mapping     -->
+        <mapping class="com.koderunner.vo.restServiceVO.SDRestCountryVO"/>
+        <mapping class="com.koderunner.vo.restServiceVO.SDRestStateVO"/>
+        <mapping class="com.koderunner.vo.restServiceVO.SDRestCityVO"/>
+        
+        
         
     </session-factory>
 </hibernate-configuration>
