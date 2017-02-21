@@ -35,7 +35,7 @@ public class SDRestController {
         	return new ResponseEntity<SDUserVO>(user, HttpStatus.OK);
     }	
 	
-    @RequestMapping(value = "/user/{loginId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/user1/{loginId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<SDUserVO> getUser(@PathVariable("loginId") String pLoginId) {
         System.out.println("Fetching User with loginId " + pLoginId);
         SDUserVO vUser = userService.findUserById(pLoginId);
@@ -50,6 +50,23 @@ public class SDRestController {
         }
         
     }	
-
+    @RequestMapping(value = "/user/{loginId}", method = RequestMethod.GET, headers="Accept=application/json")
+    public SDUserVO getUser1(@PathVariable("loginId") String pLoginId) {
+        System.out.println("Fetching User with loginId " + pLoginId);
+        SDUserVO vUser = userService.findUserById(pLoginId);
+       // SDUserVO user = (SDUserVO) userDAO.findUserByLoginId(loginId);
+        
+        if (vUser == null) {
+            System.out.println("User with id " + pLoginId + " not found");
+            return null;
+            //return new ResponseEntity<SDUserVO>(HttpStatus.NOT_FOUND);
+        }else{
+        	
+        	//return new ResponseEntity<SDUserVO>(vUser, HttpStatus.OK);
+        	return vUser;
+        	
+        }
+        
+    }
 
 }

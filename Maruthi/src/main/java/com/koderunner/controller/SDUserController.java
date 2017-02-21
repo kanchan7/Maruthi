@@ -30,6 +30,10 @@ public class SDUserController {
         session.invalidate();
         return new ModelAndView("login");
     }
+    /*@RequestMapping("/login/login.htm")
+    public ModelAndView redirectToLoginPa(HttpServletRequest request, HttpServletResponse response) {
+        return new ModelAndView("login");
+    }*/
     @RequestMapping("/login/home.htm")
     public ModelAndView redirectToHomePage(HttpServletRequest request, HttpServletResponse response) throws Exception {
         HttpSession session = request.getSession(true);
@@ -51,6 +55,11 @@ public class SDUserController {
             }
         }
 
+    }
+    
+    @RequestMapping("/searchCountry.htm")
+    public ModelAndView redirectToSearchCountry(HttpServletRequest request, HttpServletResponse response) {
+        return new ModelAndView("searchCountry");
     }
     
     @RequestMapping("/login/welcome.htm")
